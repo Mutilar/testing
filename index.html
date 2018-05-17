@@ -1,96 +1,33 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <script src="assets/js/json-sans-eval.js"></script>
-    <script src="assets/js/css-browser-selector.js"></script>
-    <script src="assets/js/game-of-life-v3.1.1.js"></script>
-    <script>
-        var interval;
-        var minutes = 0;
-        var seconds = 15;
-        window.onload = function () {
-            countdown('countdown');
 
-        }
-
-        function countdown(element) {
-            interval = setInterval(function () {
-                var el = document.getElementById(element);
-                if (seconds == 0) {
-                    if (minutes == 0) {
-                        window.location = "http://www.brianhungerman.com";
-                        clearInterval(interval);
-                        return;
-                    } else {
-                        minutes--;
-                        seconds = 60;
-                    }
-                }
-                if (minutes > 0) {
-                    var minute_text = minutes + (minutes > 1 ? ' minutes' : ' minute');
-                } else {
-                    var minute_text = '';
-                }
-                var second_text = seconds > 1 ? 'seconds' : 'second';
-
-                el.innerHTML = '<h2>Awaiting further testing...</h2> <p>In the meantime, check out my main site at brianhungerman.com! <br/><br/>You will be automatically redirected there in <strong>' + seconds + ' ' + second_text + '</strong>.</p>';
-                seconds--;
-            }, 1000);
-        }
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 
     <title>※ Testing</title>
 </head>
-<body style="margin:0px 0px 0px 0px; background-color:black;">
-    <div style="
-    text-align: center;
-    height: 200px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -200px;"
-         id='countdown'></div>
-    <div id="wrapper" style="width:100%;">
+<body style="margin:300px 300px 300px 300px; vertical-align:central">
 
+    <div ng-app="myApp" ng-controller="myCtrl">
 
-        <canvas id="canvas" width="1001" height="433" style="width:100%; height:99vh;"></canvas>
-
-        <div class="box" style="display:none">
-            <div class="subtitle">Running Information</div>
-            <p class="info"><abbr title="Current Generation">Generation</abbr>: <span id="generation"></span> | <abbr title="Number of live cells">Live cells</abbr>: <span id="livecells"></span> | <abbr title="Execution times: Algorithm / Canvas (Algorithm / Canvas Averages)">Step time</abbr>: <span id="steptime"></span> ms </p>
-
-            <span id="hint">Hint: hit the <strong>Play</strong> button!</span>
-        </div>
-
-        <div class="box controls"  style="display:none">
-            <div class="subtitle">Controls</div>
-            <form action="">
-                <input type="button" value="Run" id="buttonRun" title="Key: R" />
-                <input type="button" value="Step" id="buttonStep" title="Key: S" />
-                <input type="button" value="Clear" id="buttonClear" title="Key: C" />
-                <input type="button" value="Export" id="buttonExport" />
-                <span id="exportUrl"> | <a id="exportUrlLink">Link</a> | <a id="exportTinyUrlLink" title="Tiny URL">Create micro URL</a></span>
-            </form>
-        </div>
-
-        <div class="box layout"  style="display:none">
-            <div class="subtitle">Layout</div>
-            <form>
-                <input type="button" id="buttonTrail" value="Trail" />
-                <input type="button" id="buttonGrid" value="Grid" />
-                <input type="button" id="buttonColors" value="Colors" />
-                <span id="layoutMessages"></span>
-            </form>
-        </div>
-
-
-
+        First Name: <input type="text" ng-model="firstName"><br>
+        Last Name: <input type="text" ng-model="lastName"><br>
+        <br>
+        Full Name: {{firstName + " " + lastName}}
 
     </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.firstName = "John";
+            $scope.lastName = "Doe";
+        });
+    </script>
+
 
 </body>
 </html>
