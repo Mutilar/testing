@@ -8,8 +8,29 @@
 
 (function () {
 
-
+    var time = Date.now();
+    var frames = 0;
     var testing = {
+        step: function () {
+            document.getElementById('text').innerHTML = frames / ((Date.now() - time)/1000) ;
+            //time = Date.now();
+            frames = frames + 1;
+            /*for (var i = 0; i < 10000; i++)
+            {
+                this.context.fillStyle = testing.helpers.getRandomColor();
+                this.context.fillRect(testing.helpers.random(0, 100), testing.helpers.random(0, 100), testing.helpers.random(0, 100), testing.helpers.random(0, 100))
+            }
+            */
+        setTimeout(function () {
+                testing.step();
+            }, this.waitTime);
+            /*if (this.running) {
+                setTimeout(function () {
+                    testing.step();
+                }, this.waitTime);
+            }*/
+        },
+
         init: function () {
 
             this.canvas = document.getElementById('canvas');
@@ -19,17 +40,20 @@
             this.canvas.height = screen.availHeight;
 
             this.context.color = "black";
-            this.context.clear();
+            //this.context.clear();
 
             this.cellSize = 1;//GOL.zoom.schemes[GOL.zoom.current].cellSize;
             this.cellSpace = 1;
 
+            testing.step();
             //GOL.helpers.registerEvent(this.canvas, 'mousedown', GOL.handlers.canvasMouseDown, false);
             //GOL.helpers.registerEvent(document, 'mouseup', GOL.handlers.canvasMouseUp, false);
             //GOL.helpers.registerEvent(this.canvas, 'mousemove', GOL.handlers.canvasMouseMove, false);
 
             //this.clearWorld();
         },
+
+        
 
         helpers: {
             urlParameters: null, // Cache
@@ -41,6 +65,16 @@
             random: function (min, max) {
                 return min <= max ? min + Math.round(Math.random() * (max - min)) : null;
             },
+
+            getRandomColor: function () {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            },
+
 
 
             /**
