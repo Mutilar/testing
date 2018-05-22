@@ -8,20 +8,52 @@
 
 (function () {
 
+
+    var ship = [100, 100, 45];
     var time = Date.now();
     var frames = 0;
+
+    var altKeyDownCount = 0;
+    window.onkeydown = function (e) {
+        ship[0] = 1000;
+        Console.alert("hello");
+        if (!e) e = window.event;
+        if (e.altKey) {
+            altKeyDownCount++;
+            if (30 < altKeyDownCount) {
+                $('.key').removeClass('hidden');
+                altKeyDownCount = 0;
+            }
+            return false;
+        }
+    }
+
+    window.onkeyup = function (e) {
+        if (!e) e = window.event;
+        altKeyDownCount = 0;
+        $('.key').addClass('hidden');
+    }
+
     var testing = {
+
         step: function () {
-            document.getElementById('text').innerHTML = frames / ((Date.now() - time)/1000) ;
-            //time = Date.now();
+            document.getElementById('text').innerHTML = frames / ((Date.now() - time) / 1000);
             frames = frames + 1;
+            // this.context.fillStyle = "white";
+            // this.context.fillRect(0, 0, 2000, 2000)
+            this.context.fillStyle = "white";
+            this.context.fillRect(ship[0], ship[1], 30, 30);
+
+
+
+            // this.context.fillStyle = testing.helpers.getRandomColor();
+            // this.context.fillRect(testing.helpers.random(0, 1000), testing.helpers.random(0, 1000), testing.helpers.random(0, 5), testing.helpers.random(0, 1000))
+
             /*for (var i = 0; i < 10000; i++)
             {
-                this.context.fillStyle = testing.helpers.getRandomColor();
-                this.context.fillRect(testing.helpers.random(0, 100), testing.helpers.random(0, 100), testing.helpers.random(0, 100), testing.helpers.random(0, 100))
-            }
+             }
             */
-        setTimeout(function () {
+            setTimeout(function () {
                 testing.step();
             }, this.waitTime);
             /*if (this.running) {
@@ -32,15 +64,24 @@
         },
 
         init: function () {
+            /*   document.getElementById("wrapper").addEventListener("keydown", myFunction, false);
+   
+               function myFunction() {
+                   ship[0] += 10;
+                   ship[1] += 10;
+               }
+               */
+
 
             this.canvas = document.getElementById('canvas');
             this.context = this.canvas.getContext('2d');
-            this.context.fillRect(0, 100, 100, 100)
-            this.canvas.width = screen.availWidth;
-            this.canvas.height = screen.availHeight;
 
-            this.context.color = "black";
+            // this.canvas.width = screen.availWidth;
+            //this.canvas.height = screen.availHeight;
+
+            this.context.fillStyle = "black";
             //this.context.clear();
+            this.context.fillRect(0, 0, 2000, 2000)
 
             this.cellSize = 1;//GOL.zoom.schemes[GOL.zoom.current].cellSize;
             this.cellSpace = 1;
@@ -53,7 +94,7 @@
             //this.clearWorld();
         },
 
-        
+
 
         helpers: {
             urlParameters: null, // Cache
