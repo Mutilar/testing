@@ -1,509 +1,175 @@
 <!DOCTYPE HTML>
 <!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	CruzHacks 2019
+	Ignore the awful HTML. Time constraints necessitate creativity.
 -->
 <html>
 
 <head>
-	<title>Consuming the Cosumnes</title>
+	<title>ChemisTRY</title>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
-	</noscript>
+	<script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 
-<body class="is-preload">
+<body style='margin : 0px; overflow: hidden;'>
+	<style>
+		.modal {
+			display: none;
+			/* Hidden by default */
+			position: fixed;
+			/* Stay in place */
+			z-index: 1;
+			/* Sit on top */
+			left: 0;
+			top: 0;
+			width: 100%;
+			/* Full width */
+			height: 100%;
+			/* Full height */
+			overflow: auto;
+			/* Enable scroll if needed */
+			background-color: rgb(0, 0, 0);
+			/* Fallback color */
+			background-color: rgba(0, 0, 0, 0.4);
+			/* Black w/ opacity */
+		}
 
-	<!-- Wrapper -->
-	<div id="wrapper">
+		/* Modal Content/Box */
+		.modal-content {
+			background-color: #fefefe;
+			margin: 15% auto;
+			/* 15% from the top and centered */
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+			/* Could be more or less, depending on screen size */
+		}
 
-		<!-- Header -->
-		<header id="header">
-			<div class="logo">
-				<span class="icon fa-tint"></span>
-			</div>
-			<div class="content">
-				<div class="inner">
-					<h1>Consuming the Cosumnes</h1>
-					<p>Your one-stop shop to understanding research going on with the Cosumnes River, and why it matters.
-						<br>To sum it up: "Dam the Agroindustrial Complex!"</p>
-				</div>
-			</div>
-			<nav>
-				<ul>
-					<li>
-						<a href="#intro">Editorial</a>
-					</li>
-					<li>
-						<a href="#graphic">Infographic</a>
-					</li>
-					<li>
-						<a href="#work">Interview</a>
-					</li>
-					<li>
-						<a href="#about">The Team</a>
-					</li>
-					<li>
-						<a href="#resources">Resources</a>
-					</li>
-					<li>
-						<a href="#contact">Contact</a>
-					</li>
-					<!--<li><a href="#elements">Elements</a></li>-->
-				</ul>
-			</nav>
-		</header>
+		/* The Close Button */
+		.close {
+			color: #aaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
 
-		<!-- Main -->
-		<div id="main">
+		@media only screen and (max-width: 600px) {
+			#nav {
+				visibility: hidden !important;
+			}
+			#menu {
+				position: absolute;
+				visibility: visible;
+				z-index: 99999;
+				bottom: 50%;
+				left: 0;
+			}
+		}
+	</style>
 
-			<!-- Intro -->
-			<article id="test">
-				<h2 class="major">Intro</h2>
-				<span class="image main">
-					<img src="images/pic01.jpg" alt="" />
-				</span>
-				<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis,
-					nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus
-					erat id euismod egestas. By the way, check out my
-					<a href="#work">awesome work</a>.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu
-					ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam
-					venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet
-					venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant
-					morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus.
-					Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-			</article>
+	<div id="myModal" class="modal">
 
-			<!-- Work -->
-			<article id="work">
-				<h2 class="major">Our Recent Interview</h2>
-				<span class="image main">
-					<img src="images\fishy_news.jpg" alt="" />
-				</span>
-				<audio controls style="width:100%">
-					<source src="podcast.ogg" type="audio/ogg">
-				</audio>
-				<span class="image main">
-					<img src="images\special_report.jpg" alt="" />
-				</span>
-
-				<p>
-					Alexis: Good afternoon I am Alexis Interiano and I am here with Alejandra Munoz. Today on fishy new we are here to talk about
-					the Cosumnes River with Brian Hungerman a student at the University of California, Merced who is working with Professor
-					Joshua Viers in the department of environmental science. Much of the research done here in on the Cosumnes river one
-					of the last undammed rivers in California and there has been an awful lot of talk about wanting to dam the river.
-					<br>
-					<br> Ale: Exactly, as a society dammed rivers are normal, but with these proposals we are hearing about how damming the
-					river could negatively impact the ecosystem and communities that are involved with the river. Many of our readers has
-					requested that we get down to the truth behind these arguments, because they also see something fishy going on.
-					<br>
-					<br> Alexis: The Miwok tribe they resided in the area many years ago, but how did their actions in respecting the ecosystem
-					in the past affect the current condition of the river?
-					<br>
-					<br> Brian: You know that's a great question Alex, I think understanding first of all the history of the river will help
-					us understand where the conversation is going now. The Miwok tribe resided in the area for hundreds of years before
-					European civilizations came into the region. Up until the gold rush really is when they were forced out of their habitat
-					they lived around the Cosumnes River, living of off the native salmon, and local vegetation and they were able to have
-					a symbiotic relationship with the river. Where they never took more than they needed and they always give back to the
-					ecosystem to ensure their presence there did not hamper the ecosystem from thriving. It’s important to realize that
-					the tribe could only thrive in this region because the river was undammed. The undammed nature of the river allowed
-					for seasonal flooding which which promoted the growth of local vegetation which the Miwok people live off of as well
-					as support of the presence of the salmon in the river.
-					<br>
-					<br> Ale: As we all know the endangered Valley Oak Tree is actually native to the river what about the undamnedness of the
-					river actually allows it to thrive there?
-					<br>
-					<br> Brian: That’s a great question I think it’s important to know the context of the cosumnes River in this sense. The
-					Cosumnes River is the only river in the Central Valley that is not damned. Now damming is an important part of the ecosystem
-					because when a river is undamned it floods every season this flooding is nature's way of flushing out brush that is
-					overpowering other plants and preventing their growth. You can imagine it like a rose bush you have to trim some leaves
-					off of the rosebush to allow it to flower again this active flooding allows more vegetation to grow and the area.
-					<br>
-					<br> Alexis: So Brian you keep coming back to the flora and you mentioned the Miwok depending on the resources and an undammed
-					river. Now how would salmons success or viability thrive in these conditions.
-					<br>
-					<br> Brian: Well it’s important to know that salmon was the tribes primary source of protein for hundreds of years. So the
-					lifecycle of the salmon is important to understand. They breed and spawn upstream in the Cosumnes River. They swim all
-					the way out to the Pacific ocean for the majority of their lives after they have matured they swim back up the river
-					to their original spawning grounds and the cycle repeats. Now you throw a dam into this equation these salmon cannot
-					get back to the original spawning grounds and die without having reproduced. For the Miwok people the salmon not returning
-					was a life or death situation as is exactly what happen in the 1840s. As the first settlers from the goldrush constructed
-					small levees and dams along the Cosumnes River for agricultural purposes.
-					<br>
-					<br> Ale: You continuously go back to the Miwok people surviving in the area off of the salmon and we do know that they
-					were driven out of their homes but where are they now?
-					<br>
-					<br> Brian: I mean it’s a sad story. The tribe was very successful up until when the gold rush happened but in the 1840s
-					many settlers from across the world came to the Central Valley with the hopes of striking it rich by finding gold. Most
-					of this gold was originally found in rivers and streams so early settlers flocked to the river with the hopes of finding
-					gold in it. You know after a few years they found there was not much gold to be found in the Cosumnes River so it was
-					largely ignored. However, as civilization began to flourish in the Central Valley the need for agriculture and farming
-					increased so there was a market then to alter some of the watersheds in the region to support the large agricultural
-					project such as the growing of wheat and grain. There were some unintended side effects that the original settlers could
-					not have foreseen one of the first things that affected was the salmon and not being able to reproduce and very quickly
-					saw them not appearing in the river much longer after the 1840s. Now the Miwok people depending on the salmon for the
-					majority of their protein, and without the salmon returning the Miwok people did not know what was happening to the
-					salmon they were just continuing to fish and not finding fish in their waters so in desperation they moved out of the
-					region for search of more food. They never really established anywhere else after that partially also due to the presence
-					of more European colonies in the area it’s sad to say but in the late 1990s the last person that spoke the planes Miwok
-					language passed away. Unfortunately there are people who have descended from the Miwok people yes that are still around
-					but much of their language and culture has been lost to history. That something that we all hate to see and we are going
-					to want to do much as we can and to not let these sorts of tragedies happen in the future.
-					<br>
-					<br> Alexis: You talk about these temporary dam projects how would damming the river be the cause for these effects such
-					as the salmon depletion.
-					<br>
-					<br> Brian: YeahI mean it’s a complex biological system again the main issue here is when the salmon are trying to return
-					upstream into their normal breeding grounds. When you throw a big line in the sand and they can’t cross over into where
-					they want to go where they want to breed the salmon pass away.
-					<br>
-					<br> Alexis: So you are talking about temporary damming projects during the gold rush. But we are talking about how the
-					Cosumnes River is undamed what happen there?
-					<br>
-					<br> Brian: I mean of course the Cosumnes River has a long history during the gold rush some levees and dams were constructed
-					along the river to control it for more agricultural uses. In the 1970s I want to say there were some environmental moments
-					that started to the creation of the Cosumnes River Preserve when they started realizing that these modifications to
-					the river were negatively affecting many animals and that ecosystem these actions were taken to preserve the watershed
-					for future generations. In the formation of the Cosumnes River Preserve many of these original Gold Rush era modifications
-					were removed to try and get it back to that natural free-flowing state that allowed for such things as natural flooding
-					which is crucial for the flora in that region.
-					<br>
-					<br> Ale: You mention that the were projects that were started in the past, but what project are there now and what research
-					have you actually been doing with Professor Veirs?
-					<br>
-					<br> Brian: The Cosumnes River is a point of focus for the vice lab we are currently doing research to understand how these
-					sorts of modifications to rivers can impact the ecosystems and watersheds that they are in. So some current research
-					is going on that quite fascinates to me personally is actually trying to engineer artificial flooding along the Cosumnes
-					River. So we are actually breaking apart the sides of the river banks along to Cosumnes River so the river floods more
-					land in the rainy season and we are monitoring the vegetation growth in these regions and these artificially flooded
-					zones to understand how important flooding is for the reinstatement of endangered flora.
-					<br>
-					<br> Alexis: Let me get this straight we are not damming the river, but you mentioned how working with the vice labs bulldozers
-					are coming in and working on the river and helping it out, so there is some type of human contact with the river and
-					projects going on.
-					<br>
-					<br> Brian: Right so I might seem kind of contradictory that we are still manipulating the flow of the river but it is important
-					to understand that we are not trying to hold back the river anymore we’re actually trying to get the river back to its
-					original state. That of the terrain around it so that it is as free flowing as possible and floods the most area as
-					possible, because for every acre we are increasing in the rivers floodplain we are increasing the amount of biomass
-					and flora and fauna in that region exponentially. So there are a lot of efforts right now going on to try and make small
-					edits to the river to allow to reclaim the watershed as a did before the gold rush.
-					<br>
-					<br> Ale: So you talk a lot about how the people you are working with are specifically trying to positively impact the river
-					but there are some proposals that are coming up about people who want to dam the river how do you feel about that and
-					what’s your opinion
-					<br>
-					<br> Brian: You know it’s hard for me given my experience with the Cosumnes I’ve been working very closely with the Cosumnes
-					for over a year now. I kind of have the inside scoop as to why the Cosumnes is such a magical place not only for researchers
-					like me but also for the general public you know. I guess these proposals do makes sense from a civil engineering perspective
-					flooding is damaging and has damaged in the past farms and cities in the region. Most notably in the early 1900s Sacramento
-					was actually damage from flooding from the same watershed that the Cosumnes River is in so it's understandable to see
-					that these city architects are concerned letting such a free flowing river be so close to these large civilizations.
-					Of course it is important to mention that basically all of the central valley is heavily urbanized and is hard to find
-					any place that we can truly allow nature to be natural. Yes this flooding is actually still a double edge sword yes
-					it can cause much damage to local infrastructure but it is also vitally important for the ecosystem. You know we’re
-					talking earlier about the the Valley Oak tree this tree is actually the main reason why there haven't been dams constructed
-					on it so far and it is actually the reason that so many proposals to dam the river have been for the most part denied
-					up until this point. There has been quite a bit of research suggesting that if we had damned the Cosumnes river there’s
-					a high likelihood that the Valley Oak Tree could go extinct you know so from my experience it would be quite flippant
-					to think that the prevention of a few million dollars of property damage would justify completely removing one species
-					from this planet and decimating the flora of this watershed. So in this sense damming the river would actually be much
-					more destructive than letting it floods seasonally.
-					<br>
-					<br> Alexis: Staying on the thought of preventing the damming of the river what others ways would keeping the river undammed
-					benefit society
-					<br>
-					<br> Brian: Well Alex there are numerous primarily this is a lot of what we have been talking about today and of course
-					you could have podcasts full of information of other ways why the Cosumnes needs to stay undamned in my expert opinion.
-					So it functions importantly as a wildlife preserve the Cosumnes Wildlife Preserve features many endangered plants and
-					animals in the region, but in addition to this there are also numerous things that would be affected if we dammed the
-					river. In my field this is an important research opportunity studying the Consonus River and how it reacts to man-made
-					manipulation. The research that we are doing on the Cosumnes river is not only applicable to the Central Valley but
-					to all of California and the world. When other nations are considering environmental projects like dams they can look
-					to the Cosumnes River as an important case study for seeing why it is important to keep nature natural. Lastly there
-					is the idea of ecotourism the Cosumnes River has been a popular destination for locals for such activities as kayaking,
-					camping, and really enjoying and immersing themselves in nature and we don’t want to ruin that opportunity for future
-					generations
-					<br>
-					<br> Ale: Well a lot of the information you gave us today is very interesting what if some of your audience has suddenly
-					become very interested in helping with this project how can they do that.
-					<br>
-					<br> Brian: Well that’s a great question I think if we want to keep pushing the sorts of research opportunities forward
-					first of all we need to keep the Cosumnes River undammed. Ways you can support that as you are saying is by taking a
-					day trip out to the Cosumnes Preserve there’s a great Visitor Center there. Even if you are immersed in nature you don’t
-					realize that you are so close to Sacramento and to all these big destinations because you kind of get lost in the foliage.
-					Also let your local representative know that you are unhappy with there sorts of proposals to dam the Cosumnes River,
-					because right now the people who are writing these proposals are in the end trying to help the local communities and
-					prevent damage from flooding. Let’s make sure that our representatives know that we also appreciate having nature around
-					us and not trying to control nature too much. If we can get our representatives in the California Senate to be aware
-					of these sorts of environmental issues I think it would help a lot into making sure that these proposals don’t get much
-					further than they are now. Lastly I think that the easiest thing for us to do it that isn’t very time-consuming is to
-					let your peers know about this reach out to them on social media let people know what’s going on with the Cosumnes and
-					why this is an issue that affects all of us.
-					<br>
-					<br> Alexis: Well unfortunately that’s all we have time for, but Brian if they like to get contact with you what’s the best
-					way to contact you.
-					<br>
-					<br> Brian: Of course Alex and Alejandra I appreciate you guys having me on Fishy News if you wanna learn more or you can
-					go to consumingthecosumnes.com. That’s where you can reach out to me and learn more about what our research lab is doing.
-					Thanks guys.
-					<br>
-					<br> Alex: Well again thank you very much for coming out and talking to us Brian. Thank you to our audience for joining
-					us today on our episode of Fishy news. We hope that you'll join us next week for an exclusive on the fishy effects of
-					air pollution.
-
-				</p>
-
-			</article>
-
-			<!-- About -->
-			<article id="about">
-				<h2 class="major">About the Team</h2>
-				<h3>Brian Hungerman</h3>
-				<img style="float:left; margin:1em; width:200px" src="images/brian.png" />
-				<p>Brian is a third year computer science and engineering undergraduate at the University of California, Merced. At the
-					VICE Lab, Brian works on projects pertaining to environmental engineering and sustainability issues, including research
-					relevant to the Cosumnes River. Brian has also worked for the Center for Information Technology Research in the Interest
-					of Society (CITRIS), which helps fund and support research on these sorts of niche subjects to allow for broader audiences
-					to be able to digest important societal implications of pressing problems. Brian did the website and audio editting
-					of this project.</p>
-				<h3>Alexis Interiano</h3>
-				<img style="float:left; margin:1em; width:200px" src="images/alex.png" />
-				<p>Alexis is an undergraduate at the University of California, Merced where he is pursuing a degree in Psychology with a
-					Minor in Natural Sciences Education. Alexis Interiano was raised in El Monte, California where he was introduced to
-					the outdoors through the college preparatory program, Upward Bound Math and Science. He spent his first two summer of
-					his undergraduate career at UC Merced working in Yosemite National Park in the Education and Audio-Visual Department.
-					During his time with the national park service, he focused on the community outreach for the preservation of flora and
-					fauna. He plans on applying his education and experiences to pursue a career in environmental education. So with his
-					skills in audio-visual he was able to help the group by being one of the host of the podcast. </p>
-				<h3>Alejandra Munoz</h3>
-				<img style="float:left; margin:1em; width:200px" src="images/ale.png" />
-				<p>Hello all, my name is Alejandra Munoz I am a Public Health major at the University of California, Merced. Initially I
-					was not interested in the topic that we were researching, but as we talked about the topic more I became more invested
-					in the research. This project demonstrated to have many moving parts, but with our wide range of skills we were able
-					to divide and conquer ever part. I was responsible for writing out the script and introduction to the podcast. Throughout
-					recording I found that my ability to question what people say helped to find questions that were not initially asked
-					in our script, which ended up improving the flow of our podcast overall. I am glad that I got to learn about the cosumnes
-					river and its importance to society.</p>
-				<h3>Natalia Morales</h3>
-				<img style="float:left; margin:1em; width:200px" src="images/nat.png" />
-				<p> Natalia is a fourth-year undergraduate student at UC Merced. She is currently studying to attain her bachelor’s degree
-					in psychology, while also minoring in writing. Had writing been offered as a major in this school, she’d be double majoring.
-					Because of her fondness for writing, Natalia took the role of writing the group’s newspaper editorial. She collaborated
-					with her peers, gaining insight on the subtopics they researched for their annotated bibliographies to make an integrated
-					article on the Cosumnes River. Though she hails from the L.A. area, she’s now grown to appreciate the San Joaquin Valley
-					and what it has to offer. She’s never visited the Cosumnes River Preserve, but hopes to visit it one day.
-
-				</p>
-			</article>
-
-			<!-- Contact -->
-			<article id="contact">
-				<h2 class="major">Contact</h2>
-				<form method="post" action="#">
-					<div class="fields">
-						<div class="field half">
-							<label for="name">Name</label>
-							<input type="text" name="name" id="name" />
-						</div>
-						<div class="field half">
-							<label for="email">Email</label>
-							<input type="text" name="email" id="email" />
-						</div>
-						<div class="field">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="4"></textarea>
-						</div>
-					</div>
-					<ul class="actions">
-						<li>
-							<input type="submit" value="Send Message" class="primary" />
-						</li>
-						<li>
-							<input type="reset" value="Reset" />
-						</li>
-					</ul>
-				</form>
-			</article>
-
-			<!-- Elements -->
-			<article id="intro">
-
-
-				<h2 class="major">What’s the Dam Deal?</h2>
-				<!-- <h4>Blockquote</h4> -->
-				<blockquote>
-					<strong>
-						The Cosumnes River is the last remaining canary in the coal mine against the Central Valley’s unchecked and unregulated agroindustrial
-						complex
-					</strong>
-				</blockquote>
-
-				<section>
-					<h3 class="major">Why We Shouldn’t Dam the Cosumnes</h3>
-					<p>
-						The Cosumnes River, the last undammed river in California’s Central Valley, stems from the Sierra Nevada Mountains and flows
-						through uppermost California. As dam construction rapidly increases to match the demands of agricultural and industrial
-						sectors, the relevance of analyzing this undammed river and its distinctiveness becomes most critical. Not long ago,
-						in Fall 2014, a group of people formed the Cosumnes Coalition program with the aims of restoring and protecting the
-						river and its ecosystem. Now partnered with many other representatives, such as UC Merced experts, this coalition program
-						continues to lead the river’s conservation movement while encouraging nearby communities to collaborate in their efforts.
-						By looking at the Cosumnes River’s unique vegetation, aquatic life, and cultural ties, one can best see the significance
-						of such a group’s movement and understand why this river should remain undammed.
-
-
-					</p>
-					<span class="image main">
-						<img src="images/river.JPG" alt="" />
-					</span>
-					<blockquote>
-						Kayakers exploring the Cosumnes River.
-					</blockquote>
-					<h3 class="major">Where Water Flows Plants Grow </h3>
-					<p>
-						Unobstructed by dams and able to flow freely, the Cosumnes River and its floodplains, thrive with diverse vegetation. Delicate
-						lavender beethistles scatter the riverbanks while majestic California Oaks shelter the vast green land that goes on
-						for miles adjacent to the river. Known to have one of the richest riparian floodlands in all of California, this river
-						is unlike any other. Nevertheless, should this river be dammed, this would no longer be the case. You see, dams pose
-						a threat to floodplain vegetation. When heavy rain accumulates within the walls of a dam, the high-pressured water
-						flows are forced to breach the dams, overall resulting in the detrimental flooding and harming of nearby vegetation.
-						Dams also work against a river’s vegetation because they discourage sediment and seedlings from passing through. Retaining
-						much of its natural hydrology, the Cosumnes River’s flood waters, on the other hand, do not destroy vegetation. Its
-						free-flowing floodwaters spread across floodpains, carrying sediment, and distributing plant seedlings, thereby contributing
-						to the growth of an ecosystem. As of today, the Cosumnes River’s Preserve consists of “40,000 acres of riparian forests,
-						wetlands, vernal pool grasslands and agriculture,” with over 15% of these acres purely devoted to oaks and willows.
-						Given this enormous amount of vegetation, it thus comes to no surprise that the river’s waters are also filled with
-						a bounty of fish, all whom depend on the plants for nourishment and habitat.
-					</p>
-					<h3 class="major">
-						Fish Passage</h3>
-					<p>
-						The Cosumnes River accommodates a variety of fish species. Constrained by no borders, the fish that inhabit this river, have
-						the ability to migrate up and downstream, access nurseries and food sources, and live a long life that would’ve been
-						cut short had the river been dammed. Dams present problems to fish, specifically flow-sensitive fish. A study looking
-						at dams and their effects on fish species, found a total of 412 dams, many concentrated within southern California’s
-						coast and the Sierra Nevada foothills, to have lost flow-sensitive fish species. Additionally, all of these dams were
-						near fish that are known to be endangered. One particular fish population that’s been most studied in regards to the
-						Cosumnes River is the Chinook salmon. Studying these fish is crucial to understanding the negative effects that dams
-						pose on a river’s aquatic life. Chinook salmon are a migratory species. Originally born in freshwater, these fish then
-						migrate to the sea, to then return back to freshwater to spawn. However, their ability to migrate and reproduce is
-						drastically impaired when dams are placed in their way. Dams impede a salmon’s upstream passage and as a result not
-						many of them get to reach the spawning habitat and die. But this need not apply to salmon traveling alongside the Cosumnes
-						River. Because of the Cosumnes River’s natural hydrology, salmon and other migratory fish are able to successfully
-						migrate upwards and reproduce. It is also because of this river’s free flowing streams and fish abundance, that this
-						river has such a rich history of settlement. The Cosumnes River, its vegetation, and its fish also sustain human life.
-
-					</p>
-					<span class="image main">
-						<img src="images/salmon.jpg" alt="" />
-					</span>
-					<blockquote>
-						Salmon swimming upstream to spawn.
-					</blockquote>
-					<h3 class="major">
-						Cosumnes Culture and the Miwok People </h3>
-					<p>
-						Years before the Cosumnes River Preserve stood in place, a group of people, known as the Miwok, inhabited the land near the
-						Cosumnes. The Miwok thrived by the river, cherishing the fish and plants that it provided. Unfortunately, after the
-						Gold Rush struck, the Miwok were forced to leave their territory and relocate elsewhere. Though the Miwok no longer
-						live there, the Cosumnes River Preserve continues to receive many visitors looking to learn about their ancestral land
-						and, as told by the CCAW, “hear the voice of the waters, the land, the plants and the trees.” Descendants of the Miwok
-						now walk the trails of the preserve imagining what life was like for their ancestors, and seeking to pass on their
-						wisdom of the river’s vitality to anyone willing to learn. This land, this river, marks a sacred place in Miwok culture.
-						Dam this river, and you destroy what remains of this group’s sacred land.
-
-					</p>
-					<h3 class="major">
-						Let the River Flow </h3>
-					<p>
-						Although, having only recently been established, the Cosumnes Coalition program is rapidly increasing in momentum. With the
-						river’s diverse vegetation, aquatic life, and history in mind, this program prides itself in promoting restorative
-						and sustainable river usage practices. Nonetheless, this program would not be where they are at without the help of
-						the public. For it takes an informed community to keep this conservation movement alive.
-
-					</p>
-					<h3 class="major">
-						Want to Get Involved?
-					</h3>
-					<p>
-						This coalition and their partnerships need all the help they can receive and you can get involved. Sign up to volunteer at
-						the Cosumnes River Preserve and help staff with conservation projects or get involved with Cosumnes Culture and Waterways
-						(CCAW) to learn more about Miwok culture and river practices.
-					</p>
-
-
-				</section>
-
-			</article>
-
-
-			<!-- Elements -->
-			<article id="resources">
-				<h2 class="major">Additional Resources</h2>
-
-				<section>
-					<p>
-						CCAW | purpose. Retrieved from https://www.ccaww.org/purpose
-						<br>
-						<br>Cosumnes Coalition: About Us. (n.d.). Retrieved from http://www.cosumnescoalition.org/about-us.html
-						<br>
-						<br>Marques, H., Dias, J. H. P., Perbiche-Neves, G., Kashiwaqui, E. A. L., & Ramos, I. P. (2018). Importance of dam-free
-						tributaries for conserving fish biodiversity in Neotropical reservoirs. Biological conservation, 224, 347-354.
-						<br>
-						<br>Swenson, R. O., Whitener, K., & Eaton, M. (2003). Restoring floods on floodplains: riparian and floodplain restoration
-						at the Cosumnes River Preserve. In California Riparian Systems: Processes and Floodplain Management, Ecology, Restoration,
-						2001 Riparian Habitat and Floodplains Conference Proceedings, Faber PM (ed.). Riparian Habitat Joint Venture: Sacramento,
-						CA (pp. 224-229).
-						<br>
-						<br>Viers, J. H., Hogle, I. B., & Quinn, J. F. Monitoring Riparian Restoration: Making the most with limited data from
-						the Cosumnes River Floodplain.
-					</p>
-				</section>
-
-			</article>
-
-
-			<!-- Elements -->
-			<article id="graphic">
-				<h2 class="major">A Helpful Infographic</h2>
-				<!-- <h4>Blockquote</h4> -->
-				<section>
-					<span class="image main">
-						<img src="images/infographic.png" alt="" />
-					</span>
-					<p>
-						<a href="#resources"> See Resources Here! </a>
-					</p>
-				</section>
-
-			</article>
-
-
-
+		<!-- Modal content -->
+		<div class="modal-content">
+			<h2>Glucose Combustion Reaction</h2>
+			<p id = "modal-content-p">C6H12O6 + 6 O2 --> 6 CO2 + 6 H2O</p>
 		</div>
 
-		<!-- Footer -->
-		<footer id="footer">
-			<p class="copyright">&copy; University of California, Merced</p>
-		</footer>
-
 	</div>
+	<div id="menu">
+		<button style="z-index: 1;position: absolute;top: 200px; width: 50px; height: 50px; line-height: 50px; border: 2px black; border-radius: 50%; color: black; text-align: center; background: whitesmoke; "
+		onclick="buttonPress()">React</button>
+		<button style="z-index: 1;position: absolute;top: 250px; width: 50px; height: 50px; line-height: 50px; border: 2px black; border-radius: 50%; color: black; text-align: center; background: whitesmoke; "
+		onclick="addGlucose()">G++</button>
+		<button style="z-index: 1;position: absolute;top: 300px; width: 50px; height: 50px; line-height: 50px; border: 2px black; border-radius: 50%; color: black; text-align: center; background: whitesmoke; "
+		onclick="addOxygen()">O++</button>
+		<button style="z-index: 1;position: absolute;top: 350px; width: 50px; height: 50px; line-height: 50px; border: 2px black; border-radius: 50%; color: black; text-align: center; background: whitesmoke; "
+		onclick="addUranium()">U++</button>
+	</div>
+	<style>
+		#arjsDebugUIContainer {
+			display: none;
+		}
 
-	<!-- BG -->
-	<div id="bg"></div>
+		body,
+		input,
+		select,
+		textarea {
+			color: #646464;
+			font-family: "Source Sans Pro", Helvetica, sans-serif;
+			font-size: 14pt;
+			font-weight: 400;
+			line-height: 1.75;
+		}
+	</style>
+	<div id="nav" style="position: fixed;top: 0;width: 425px; height: 100%; background: #fff; outline: 0; overflow-x: hidden; overflow-y: auto; text-align: right; visibility: visible; z-index: 10000; right: 0;">
+		<header id="header">
+			<center>
+				<h1 style="font-size: 2.5em;font-weight: 700;margin: 1.5em ;color: #555;">ChemisTRY</h1>
+				<p style="color: #aaa;margin: 1.5em;">Augmented Reality Project Based Learning for Middle-School Chemistry</p>
+				<a href="https://github.com/bitnaughts/chemistry"><img src="icons.png" style="margin: .5em;"></a>
+			</center>
+		</header>
+		<table>
+			<tr>
+				<td style="width: 50%">
+					<center>
+						<h3 style="margin: 1em ;">Exothermics</h3>
+						<img style="width: 70%; margin: .25em;" src="4.png">
+					</center>
+				</td>
+				<td style="width: 50%">
+					<center>
+						<h3 style="margin: 1em ;">Radioactivity</h3>
+						<img style="width: 70%; margin: .25em ;" src="2.png">
+					</center>
 
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 50%">
+					<center>
 
+						<h3 style="margin: 1em ;">Titration</h3>
+						<img style="width: 70%; margin:.25em ;" src="3.png">
+					</center>
+				</td>
+				<td style="width: 50%">
+					<center>
+
+						<h3 style="margin: 1em ;">Organics</h3>
+						<img style="width: 70%; margin: .25em ;" src="6.png">
+					</center>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 50%">
+					<center>
+
+						<h3 style="margin: 1em ;">Biochemistry</h3>
+						<img style="width: 70%; margin:.25em ;" src="5.png">
+					</center>
+				</td>
+				<td style="width: 50%">
+					<center>
+
+						<h3 style="margin: 1em ;">Solvents</h3>
+						<img style="width: 70%; margin: .25em ;" src="1.png">
+					</center>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<a-scene embedded arjs>
+		<a-marker preset="hiro" id="marker">
+		</a-marker>
+		<a-entity camera look-controls mouse-cursor>
+	</a-scene>
+	<script src="Molecules.js"></script>
 </body>
 
 </html>
